@@ -13,4 +13,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require serviceworker-companion
 //= require_tree .
+
+$( document ).on('turbolinks:load', function() {
+	var $doc = $('html, body');
+  $('.navegacao a[href^="#"]').click(function() {
+      $doc.animate({
+          scrollTop: $( $.attr(this, 'href')).offset().top
+      }, 500);
+      return false;
+  });
+
+  $('.carousel').carousel({
+  	interval: 3000
+  });
+});
