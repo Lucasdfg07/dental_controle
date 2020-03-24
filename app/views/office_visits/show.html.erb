@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @office_visit.date %>
+</p>
+
+<p>
+  <strong>Hour:</strong>
+  <%= @office_visit.hour %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @office_visit.status %>
+</p>
+
+<p>
+  <strong>Payment method:</strong>
+  <%= @office_visit.payment_method %>
+</p>
+
+<p>
+  <strong>Treatment:</strong>
+  <%= @office_visit.treatment %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @office_visit.value %>
+</p>
+
+<p>
+  <strong>Upload:</strong>
+  <%= @office_visit.upload %>
+</p>
+
+<%= link_to 'Edit', edit_office_visit_path(@office_visit) %> |
+<%= link_to 'Back', office_visits_path %>
