@@ -1,18 +1,16 @@
-version: "2"
+version: "3"
 
 services:
   postgres:
     image: "postgres:9.5"
     volumes:
       - postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: "trust"
 
   app:
     depends_on:
       - "postgres"
     build: .
-    command: bash start
+    command: bash start.sh
     ports:
       - "3000:3000"
     volumes:
