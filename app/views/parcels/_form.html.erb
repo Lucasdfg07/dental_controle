@@ -1,4 +1,4 @@
-<%= form_for(parcel) do |f| %>
+<%= form_for(parcel, url: {office: params[:office]}) do |f| %>
   <% if parcel.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>

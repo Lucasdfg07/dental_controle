@@ -1,11 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h3>Adicionar Pagamento Recebido</h3>
+<h3>Adicionar Parcela do Pagamento</h3>
 
 Paciente: <b><%= @office_visit.patient.name %></b>
 
 <section class="row text-center">
   <section class="col-md-4">
+
+    <hr />
+      Valor a receber: <b style="color: red"><%= @office_visit.value %></b>
+    <hr />
+      Valor recebido: <b style="color: green"><%= @parcels.sum(:value) %></b>
+    <hr />
     <%= render 'form', parcel: @parcel %>
   </section>
 
@@ -15,7 +21,7 @@ Paciente: <b><%= @office_visit.patient.name %></b>
         <tr>
           <th>Id</th>
           <th>Valor Recebido</th>
-          <th>Data</th>
+          <th>Data de recebimento</th>
           <th>Observação</th>
           <th colspan="2"></th>
         </tr>
@@ -32,11 +38,12 @@ Paciente: <b><%= @office_visit.patient.name %></b>
             <td><%= parcel.value %></td>
             <td><%= parcel.created_at %></td>
             <td><%= parcel.observation %></td>
-            <td><%= link_to 'Edit', edit_parcel_path(parcel), class: 'btn btn-info' %></td>
-            <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+            <td><%= link_to 'Apagar', parcel, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <%= will_paginate @parcels %>
   </section>
 </section> 
