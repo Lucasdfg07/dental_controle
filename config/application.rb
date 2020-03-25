@@ -11,5 +11,9 @@ module DentalControle
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.i18n.default_locale = "pt-BR"
+    Time::DATE_FORMATS[:default] = "%d/%m/%Y %H:%M"
+ 	Date::DATE_FORMATS[:default] = "%d/%m/%Y"
+ 	config.time_zone = 'Brasilia'
   end
 end

@@ -1,34 +1,43 @@
 class OfficeVisitsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_office_visit, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient, only: [:index, :new]
 
-  # GET /office_visits
-  # GET /office_visits.json
+
   def index
-    @office_visits = OfficeVisit.all
+    @q = OfficeVisit.ransack(params[:q])
+    
+    @office_visits = @q.result.where(patient: @patient)
+                      .order(date: :ASC, hour: :ASC)
+                      .paginate(page: params[:page], per_page: 10)
+    
+
+    if params[:page].present? && params[:page] > "1"
+      @count = (params[:page].to_i - 1) * 10
+    else
+      @count = 0
+    end
   end
 
-  # GET /office_visits/1
-  # GET /office_visits/1.json
+
   def show
   end
 
-  # GET /office_visits/new
+
   def new
     @office_visit = OfficeVisit.new
   end
 
-  # GET /office_visits/1/edit
   def edit
   end
 
-  # POST /office_visits
-  # POST /office_visits.json
+
   def create
     @office_visit = OfficeVisit.new(office_visit_params)
 
     respond_to do |format|
       if @office_visit.save
-        format.html { redirect_to @office_visit, notice: 'Office visit was successfully created.' }
+        format.html { redirect_to patients_path, notice: 'Office visit was successfully created.' }
         format.json { render :show, status: :created, location: @office_visit }
       else
         format.html { render :new }
@@ -37,12 +46,11 @@ class OfficeVisitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /office_visits/1
-  # PATCH/PUT /office_visits/1.json
+
   def update
     respond_to do |format|
       if @office_visit.update(office_visit_params)
-        format.html { redirect_to @office_visit, notice: 'Office visit was successfully updated.' }
+        format.html { redirect_to office_visits_path(id: params[:patient]), notice: 'Office visit was successfully updated.' }
         format.json { render :show, status: :ok, location: @office_visit }
       else
         format.html { render :edit }
@@ -51,24 +59,26 @@ class OfficeVisitsController < ApplicationController
     end
   end
 
-  # DELETE /office_visits/1
-  # DELETE /office_visits/1.json
+
   def destroy
     @office_visit.destroy
     respond_to do |format|
-      format.html { redirect_to office_visits_url, notice: 'Office visit was successfully destroyed.' }
+      format.html { redirect_to request.referrer, notice: 'Office visit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def set_patient
+      @patient = Patient.find(params[:id])
+    end
+
     def set_office_visit
       @office_visit = OfficeVisit.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def office_visit_params
-      params.require(:office_visit).permit(:date, :hour, :status, :payment_method, :treatment, :value, :upload)
+      params.require(:office_visit).permit(:patient_id, :date, :hour, :status, :payment_method, :treatment, :value, {documents: []})
     end
 end

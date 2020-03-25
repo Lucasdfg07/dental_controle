@@ -1,39 +1,71 @@
-<p id="notice"><%= notice %></p>
+<h3>Listagem de Consultas</h3>
 
-<h1>Office Visits</h1>
+<hr />
 
-<table>
+<%= search_form_for @q do |f| %>
+  <%= hidden_field_tag :id, params[:id] %>
+
+  <section class="form-group row">
+    <section class="col-md-4">
+      <%= f.select(:payment_method_eq, OfficeVisit.payment_methods.map{|p| p}, {include_blank: 'Procure por um método de pagamento'}, {class: 'form-control'}) %>
+    </section>
+
+    <section class="col-md-4 form-group">
+      <%= f.collection_select(:treatment_eq, OfficeVisit.order(treatment: :ASC).where(patient: @patient), :treatment, :treatment, {include_blank: 'Procure por um tratamento realizado'}, {class: 'form-control'}) %>
+    </section>
+
+    <section class="col-md-4">
+      <%= f.collection_select(:date_eq, OfficeVisit.order(date: :ASC).where(patient: @patient), :date, :date, {include_blank: 'Procure por uma data de atendimento'}, {class: 'form-control'}) %>
+    </section>
+
+    <br />
+    
+    <%= f.submit 'Pesquisar', class: 'col-4 btn btn_search offset-md-4' %>
+  </section>
+<% end %>
+
+<table class="table table-hover text-center">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Hour</th>
-      <th>Status</th>
-      <th>Payment method</th>
-      <th>Treatment</th>
-      <th>Value</th>
-      <th>Upload</th>
-      <th colspan="3"></th>
+      <th>Id</th>
+      <th>Pagamento</th>
+      <th>Tratamento</th>
+      <th>Valor Cobrado (R$)</th>
+      <th>Data marcada para Consulta</th>
+      <th>Visualizar Anexos</th>
+      <th>Remarcar Paciente</th>
+      <th>Cadastrar Atendimento</th>
+      <th>Exibir</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @office_visits.each do |office_visit| %>
+      <% content_tag :div do %>
+        <%= @count += 1 %>
+      <% end %>
+
       <tr>
-        <td><%= office_visit.date %></td>
-        <td><%= office_visit.hour %></td>
-        <td><%= office_visit.status %></td>
-        <td><%= office_visit.payment_method %></td>
-        <td><%= office_visit.treatment %></td>
-        <td><%= office_visit.value %></td>
-        <td><%= office_visit.upload %></td>
-        <td><%= link_to 'Show', office_visit %></td>
-        <td><%= link_to 'Edit', edit_office_visit_path(office_visit) %></td>
-        <td><%= link_to 'Destroy', office_visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><b><%= @count %></b></td>
+        <td><%= (office_visit.payment_method.present?) ? office_visit.payment_method : '-' %></td>
+        <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+        <td><%= (office_visit.value.present?) ? office_visit.value : '-' %></td>
+        <td><%= office_visit.date %> <%= office_visit.hour %></td>
+        <td>
+          <% office_visit.documents.each_with_index do |document, index| %>
+            <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
+            <br />
+          <% end %>
+        </td>
+        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
+        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Recebimento', parcels_path(office: office_visit, patient: params[:id]), class: 'btn btn-success' %></td>
+        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Office Visit', new_office_visit_path %>
+<%= link_to 'Voltar à listagem de pacientes', patients_path, class: 'btn btn-warning mb-4' %>

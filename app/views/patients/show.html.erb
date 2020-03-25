@@ -1,24 +1,25 @@
-<p id="notice"><%= notice %></p>
+<h3>Exibir paciente</h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
-</p>
+<section class="show text-center">
+	<p>
+	  <strong>Nome:</strong>
+	  <%= @patient.name %>
+	</p>
 
-<p>
-  <strong>Document:</strong>
-  <%= @patient.document %>
-</p>
+	<p>
+	  <strong>CPF:</strong>
+	  <%= @patient.document %>
+	</p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @patient.address %>
-</p>
+	<p>
+	  <strong>Endereço:</strong>
+	  <%= @patient.address %>
+	</p>
 
-<p>
-  <strong>Telephone:</strong>
-  <%= @patient.telephone %>
-</p>
+	<p>
+	  <strong>Telefone:</strong>
+	  <%= @patient.telephone %>
+	</p>
+</section>
 
-<%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>
+<%= link_to 'Voltar', patients_path, class: 'btn btn-warning mb-4 mt-3' %>

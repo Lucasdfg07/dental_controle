@@ -1,58 +1,51 @@
 class SpentsController < ApplicationController
-  before_action :set_spent, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_spent, only: [:edit, :update, :destroy]
 
-  # GET /spents
-  # GET /spents.json
+
   def index
-    @spents = Spent.all
+    @spents = Spent.where(user: current_user).paginate(page: params[:page], per_page: 5)
+
+    if params[:id].present?
+      @spent = Spent.find(params[:id])
+    else
+      @spent = Spent.new
+    end
+
+    if params[:page].present? && params[:page] > "1"
+      @count = (params[:page].to_i - 1) * 5
+    else
+      @count = 0
+    end
   end
 
-  # GET /spents/1
-  # GET /spents/1.json
-  def show
-  end
-
-  # GET /spents/new
-  def new
-    @spent = Spent.new
-  end
-
-  # GET /spents/1/edit
   def edit
+    redirect_to spents_path(id: @spent)
   end
 
-  # POST /spents
-  # POST /spents.json
+ 
   def create
     @spent = Spent.new(spent_params)
+    @spent.user = current_user
 
-    respond_to do |format|
-      if @spent.save
-        format.html { redirect_to @spent, notice: 'Spent was successfully created.' }
-        format.json { render :show, status: :created, location: @spent }
-      else
-        format.html { render :new }
-        format.json { render json: @spent.errors, status: :unprocessable_entity }
-      end
+    if @spent.save
+      redirect_to request.referrer, notice: 'Spent was successfully created.'
+    else
+      redirect_to request.referrer, alert: 'Erro na criação do gasto.'
     end
   end
 
-  # PATCH/PUT /spents/1
-  # PATCH/PUT /spents/1.json
+
   def update
-    respond_to do |format|
       if @spent.update(spent_params)
-        format.html { redirect_to @spent, notice: 'Spent was successfully updated.' }
-        format.json { render :show, status: :ok, location: @spent }
+        redirect_to spents_path, notice: 'Spent was successfully updated.'
+
       else
-        format.html { render :edit }
-        format.json { render json: @spent.errors, status: :unprocessable_entity }
+        redirect_to spents_path, alert: 'Erro na atualização do gasto.'
       end
-    end
   end
 
-  # DELETE /spents/1
-  # DELETE /spents/1.json
+
   def destroy
     @spent.destroy
     respond_to do |format|
@@ -62,12 +55,12 @@ class SpentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_spent
       @spent = Spent.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+
     def spent_params
       params.require(:spent).permit(:value, :description)
     end

@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DentalControle</title>
+    <title>Dental Controle - Sistema Odontológico</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag asset_path('/icons/favicon.ico')%>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
   </head>
 
-  <body>
-    <%= yield %>
+  <body>  	
+    <% if user_signed_in? %>
+	    <%= render 'shared/navbar_logged' %>
+      
+      <section class="container logged_container">
+        <%= yield %> 
+      </section>
+    <% else %>
+      <%= render 'shared/navbar_unlogged' %>
+      <%= yield %> 
+    <% end %>
+
+    <%= render 'shared/footer' %>
   </body>
 </html>

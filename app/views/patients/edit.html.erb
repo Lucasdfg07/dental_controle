@@ -1,6 +1,11 @@
-<h1>Editing Patient</h1>
+<section class="text-center mb-4">
+	<h3>Tela de edição de pacientes</h3>
 
-<%= render 'form', patient: @patient %>
+	<section class="col-md-4 offset-md-4 ">
+			<%= render 'form', patient: @patient %>
 
-<%= link_to 'Show', @patient %> |
-<%= link_to 'Back', patients_path %>
+			<br />
+
+			<%= link_to 'Voltar', patients_path, class: 'btn btn-warning' %>
+		</section>
+</section>

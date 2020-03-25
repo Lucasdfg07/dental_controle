@@ -1,4 +1,4 @@
-<%= form_for(parcel) do |f| %>
+<%= form_for(parcel, url: {office: params[:office]}) do |f| %>
   <% if parcel.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
@@ -11,17 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :value %>
-    <%= f.text_field :value %>
+  <div class="field form-group">
+    Valor Recebido <br />
+    <%= f.number_field :value, step: :any, placeholder: 'R$ 100,00', class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= f.label :observation %>
-    <%= f.text_field :observation %>
+  <div class="field form-group">
+    Observação <br />
+    <%= f.text_area :observation, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions mb-4">
+    <%= f.submit 'Salvar', class: 'btn btn-primary' %>
   </div>
+
+
+  <%= link_to 'Voltar', office_visits_path(id: params[:patient]), class: 'btn btn-warning mb-4' %>
 <% end %>

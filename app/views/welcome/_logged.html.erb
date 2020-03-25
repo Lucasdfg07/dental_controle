@@ -1,0 +1,72 @@
+<h3>Listagem de Pacientes</h3>
+
+<section class="row">
+	<section class="col-md-7">
+		Bem vindo(a) <b><%= current_user.name %></b> <br />
+	  	Data de expiração do sistema: <%= current_user.payment_expiration.strftime("%d / %m / %Y") %> <br />
+	  	Efetue o pagamento do sistema entre <b style="color: green;"><%= (current_user.payment_expiration - 1.week).strftime("%d / %m / %Y") %> e <%= current_user.payment_expiration.strftime("%d / %m / %Y") %></b>
+	</section>
+
+	<section class="col-md-5 perfil_image">
+		<%= image_tag(current_user.avatar.medium) if current_user.avatar.present? %>
+	</section>
+</section>
+<br /><br />
+
+<p>Abaixo encontra-se a lista de pacientes a serem atendidos hoje!</p>
+
+<hr />
+
+<span>Plano atual: <b><%= current_user.plan %></b></span>
+
+<%= search_form_for @q, url: root_path do |f| %>
+  <section class="form-group row">
+    <section class="col-9 form-group">
+      <%= f.select(:patient_name_eq, OfficeVisit.where(date: Date.today).collect {|office| [office.patient.name] }, {include_blank: 'Procure por um paciente'}, {class: 'form-control'}) %>
+    </section>
+
+    <section class="col-3">
+    	<%= f.submit 'Pesquisar', class: ' col-12 btn btn_search' %>
+    </section>
+  </section>
+<% end %>
+
+<table class="table table-hover text-center">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Data marcada para Consulta</th>
+      <th>Visualizar Anexos</th>
+      <th>Remarcar Paciente</th>
+      <th>Cadastrar Atendimento</th>
+      <th>Exibir</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @office_visits.each do |office_visit| %>
+      <% content_tag :div do %>
+        <%= @count += 1 %>
+      <% end %>
+
+      <tr>
+        <td><b><%= @count %></b></td>
+        <td><%= office_visit.patient.name%></td>
+        <td><%= office_visit.date %> <%= office_visit.hour %></td>
+        <td>
+          <% office_visit.documents.each_with_index do |document, index| %>
+            <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
+            <br />
+          <% end %>
+        </td>
+        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
+        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Recebimento', parcels_path(office: office_visit, patient: params[:id]), class: 'btn btn-success' %></td>
+        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

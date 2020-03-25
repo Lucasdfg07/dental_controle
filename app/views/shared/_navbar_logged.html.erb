@@ -1,0 +1,47 @@
+<nav class="navegacao navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <%= link_to root_path do %>
+    <%= image_tag 'molar.png', alt: 'Dental Controle icon' %>
+  <% end %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <%= link_to 'Página inicial', root_path %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Editar Perfil', edit_user_registration_path %>
+      </li>
+
+      <li class="nav-item">
+        <div class="dropdown">
+            <a class="navbar-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cadastro
+            </a>
+
+            <div class="dropdown-menu">
+              <%= link_to 'Cadastrar novo paciente', new_patient_path, class: 'dropdown-item' %>
+              <hr />
+              <%= link_to 'Cadastrar gastos', spents_path, class: 'dropdown-item' %>
+            </div>
+      	</div>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Pacientes', patients_path %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Exibir Gráficos de Rendimento', patients_path %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "nav_li"  %>
+      </li>
+    </ul>
+  </div>
+</nav>

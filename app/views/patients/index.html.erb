@@ -1,33 +1,44 @@
-<p id="notice"><%= notice %></p>
+<h3>Listagem de Pacientes cadastrados</h3>
 
-<h1>Patients</h1>
+<%= search_form_for @q do |f| %>
+  <section class="form-group row">
+    <%= f.collection_select(:name_eq, Patient.order(name: :ASC), :name, :name, {include_blank: 'Busque por um paciente específico!'}, {class: 'form-control col-10'}) %>
+    <%= f.submit 'Pesquisar', class: 'col-2 btn btn_search' %>
+  </section>
+<% end %>
 
-<table>
+<table class="table table-hover text-center">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Document</th>
-      <th>Address</th>
-      <th>Telephone</th>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Visualizar Consultas</th>
+      <th>Agendar Consulta</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @patients.each do |patient| %>
+      <% content_tag :div do %>
+        <%= @count += 1 %>
+      <% end %>
+
       <tr>
+        <td><b><%= @count %></b></td>
         <td><%= patient.name %></td>
         <td><%= patient.document %></td>
-        <td><%= patient.address %></td>
         <td><%= patient.telephone %></td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Consultas', office_visits_path(id: patient), class: 'btn btn-success' %></td>
+        <td><%= link_to 'Agendar', new_office_visit_path(id: patient), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Exibir', patient, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-dark' %></td>
+        <td><%= link_to 'Apagar', patient, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Patient', new_patient_path %>
+<%= will_paginate @patients %>
