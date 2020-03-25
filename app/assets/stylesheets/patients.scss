@@ -20,8 +20,13 @@
 }
 .show {
 	box-shadow: -2px 2px 10px rgba(10,10,10,0.4);
-
+	padding: 10px;
+	
 	p {
 		border-bottom: 1px solid rgba(200,200,200,0.7);
+		padding: 5px;
 	}
+}
+.btn_search {
+	border: 1px solid rgba(200,200,200,0.7);
 }

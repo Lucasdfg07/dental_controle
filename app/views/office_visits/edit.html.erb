@@ -1,6 +1,11 @@
-<h1>Editing Office Visit</h1>
+<section class="text-center mb-4 col-md-4 offset-md-4">
+  <% if params[:register].present? %>
+    <%= render 'register' %>
+  <% elsif params[:remark].present? %>
+    <%= render 'remark' %>
+  <% end %>
 
-<%= render 'form', office_visit: @office_visit %>
+  <br />
 
-<%= link_to 'Show', @office_visit %> |
-<%= link_to 'Back', office_visits_path %>
+  <%= link_to 'Voltar', :back, class: 'btn btn-warning' %>
+</section>

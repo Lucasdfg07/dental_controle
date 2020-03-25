@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
 
   def index
     @q = Patient.ransack(params[:q])
-    @patients = @q.result(distinct: true)
+    @patients = @q.result(distinct: true).where(user: current_user)
   end
 
 
@@ -40,7 +40,7 @@ class PatientsController < ApplicationController
   def update
     respond_to do |format|
       if @patient.update(patient_params)
-        format.html { redirect_to @patient, notice: 'Paciente editado com sucesso!' }
+        format.html { redirect_to patients_path, notice: 'Paciente editado com sucesso!' }
         format.json { render :show, status: :ok, location: @patient }
       else
         format.html { render :edit }

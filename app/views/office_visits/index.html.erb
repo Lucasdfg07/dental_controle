@@ -1,39 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Office Visits</h1>
+<h3>Listagem de Consultas</h3>
 
-<table>
+<table class="table table-hover text-center">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Hour</th>
-      <th>Status</th>
-      <th>Payment method</th>
-      <th>Treatment</th>
-      <th>Value</th>
-      <th>Upload</th>
-      <th colspan="3"></th>
+      <th>Id</th>
+      <th>Pagamento</th>
+      <th>Tratamento</th>
+      <th>Valor Cobrado (R$)</th>
+      <th>Data marcada para Consulta</th>
+      <th>Visualizar Anexos</th>
+      <th>Remarcar Paciente</th>
+      <th>Cadastrar Atendimento</th>
+      <th>Exibir</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @office_visits.each do |office_visit| %>
       <tr>
-        <td><%= office_visit.date %></td>
-        <td><%= office_visit.hour %></td>
-        <td><%= office_visit.status %></td>
-        <td><%= office_visit.payment_method %></td>
-        <td><%= office_visit.treatment %></td>
-        <td><%= office_visit.value %></td>
-        <td><%= office_visit.upload %></td>
-        <td><%= link_to 'Show', office_visit %></td>
-        <td><%= link_to 'Edit', edit_office_visit_path(office_visit) %></td>
-        <td><%= link_to 'Destroy', office_visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
+        <td><%= (office_visit.payment_method.present?) ? office_visit.payment_method : '-' %></td>
+        <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+        <td><%= (office_visit.value.present?) ? office_visit.value : '-' %></td>
+        <td><%= office_visit.date.strftime("%d/%m/%Y") %> <%= office_visit.hour %></td>
+        <td><%= (office_visit.upload.present?) ? office_visit.upload : '-' %></td>
+        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
+        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Office Visit', new_office_visit_path %>
+<%= link_to 'Voltar à listagem de pacientes', patients_path, class: 'btn btn-warning mb-4' %>
