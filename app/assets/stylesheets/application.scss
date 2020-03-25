@@ -23,3 +23,18 @@ table th, table tr, table td {
     padding: 0px 10px;
   }
 }
+
+#notice, #alert {
+	border-radius: 20px;
+	color: white;
+	padding: 10px;
+	width: 40%;
+	text-align: center;
+}
+
+#notice {
+	background-color: rgba(20,20,200,0.6);
+}
+#alert {
+	background-color: rgba(200,20,20,0.6);
+}

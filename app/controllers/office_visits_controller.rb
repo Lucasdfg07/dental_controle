@@ -6,7 +6,10 @@ class OfficeVisitsController < ApplicationController
 
   def index
     @q = OfficeVisit.ransack(params[:q])
-    @office_visits = @q.result.where(patient: @patient).paginate(page: params[:page], per_page: 10)
+    
+    @office_visits = @q.result.where(patient: @patient)
+                      .order(date: :ASC, hour: :ASC)
+                      .paginate(page: params[:page], per_page: 10)
     
 
     if params[:page].present? && params[:page] > "1"

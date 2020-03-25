@@ -24,4 +24,7 @@
   <div class="actions mb-4">
     <%= f.submit 'Salvar', class: 'btn btn-primary' %>
   </div>
+
+
+  <%= link_to 'Voltar', office_visits_path(id: params[:patient]), class: 'btn btn-warning mb-4' %>
 <% end %>

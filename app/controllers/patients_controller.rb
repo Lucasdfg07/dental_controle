@@ -5,7 +5,10 @@ class PatientsController < ApplicationController
 
   def index
     @q = Patient.ransack(params[:q])
-    @patients = @q.result(distinct: true).where(user: current_user).paginate(page: params[:page], per_page: 10)
+    @patients = @q.result(distinct: true)
+                .where(user: current_user)
+                .order(name: :ASC)
+                .paginate(page: params[:page], per_page: 10)
     
 
     if params[:page].present? && params[:page] > "1"
