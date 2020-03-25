@@ -1,1 +1,15 @@
-teste
+<h3>Listagem de Pacientes</h3>
+
+<span>Bem vindo(a) <b><%= current_user.name %></b> <br />
+	  Data de expiração do sistema: <%= current_user.payment_expiration.strftime("%d / %m / %Y") %> <br />
+	  Efetue o pagamento do sistema entre <b style="color: green;"><%= (current_user.payment_expiration - 1.week).strftime("%d / %m / %Y") %> e <%= current_user.payment_expiration.strftime("%d / %m / %Y") %></b></span>
+
+<br /><br />
+
+<p>Abaixo encontra-se a lista de pacientes a serem atendidos hoje!</p>
+
+<hr />
+
+<span>Plano atual: <b><%= current_user.plan %></b></span>
+
+<%= image_tag(current_user.avatar.big) if current_user.avatar.present? %>

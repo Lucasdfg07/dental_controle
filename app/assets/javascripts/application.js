@@ -11,12 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery3
 //= require popper
 //= require bootstrap
 //= require serviceworker-companion
+//= require maskedinput
 //= require_tree .
 
 $( document ).on('turbolinks:load', function() {

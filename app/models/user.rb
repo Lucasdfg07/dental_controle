@@ -6,9 +6,11 @@ class User < ApplicationRecord
 
   enum role: [:user, :admin]
 
-  enum plan: [:basic, :intermediate, :advanced]
+  enum plan: [:Básico, :Intermediário, :Avançado]
 
-  enum payment_status: [:pendent, :canceled, :test_period]
+  enum payment_status: [:Pendente, :Cancelado, :Teste]
+
+  mount_uploader :avatar, AvatarUploader
 
   validates_presence_of :payment_expiration, :payment_status, :plan, :role
 end

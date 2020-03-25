@@ -1,3 +1,19 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+$(document).on 'turbolinks:load', ->
+	$('.cnpj').hide()
+	$('.cpf_btn').hide()
+
+	$('.cnpj_btn').on 'click', ->
+		$('.cnpj').toggle()
+		$('.cpf_btn').toggle()
+		$('.cnpj_btn').toggle()
+		$('.cpf').toggle()
+
+	$('.cpf_btn').on 'click', ->
+		$('.cnpj').toggle()
+		$('.cpf_btn').toggle()
+		$('.cnpj_btn').toggle()
+		$('.cpf').toggle()
