@@ -6,5 +6,5 @@ class OfficeVisit < ApplicationRecord
 
 	enum payment_method: [:Dinheiro, :Cartão, :Convênio]
 
-	mount_uploaders :upload, DocumentUploader
+	mount_uploaders :documents, DocumentUploader
 end

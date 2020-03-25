@@ -16,14 +16,6 @@
     <% end %>
 
     <div class="field form-group">
-      Confirmado para a data e hora <br />
-      <section class="row">
-        <%= f.text_field :date, type: 'date', class: 'form-control col-7 mr-3', required: true %>
-        <%= f.text_field :hour, type: 'time', class: 'form-control col-4', required: true %>
-      </section>
-    </div>
-
-    <div class="field form-group">
       Pagamento:<br/>
       <%= f.select(:payment_method, OfficeVisit.payment_methods.keys.map{|p| p}, {}, {class: 'form-control'}) %>
     </div>
@@ -34,12 +26,12 @@
 
     <div class="field form-group">
       Valor Cobrado (R$):<br/>
-      <%= f.number_field :value, min: 0, placeholder: '200,00', class: 'form-control' %>
+      <%= f.number_field :value, min: 0, step: :any, placeholder: '200,00', class: 'form-control' %>
     </div>
 
     <div class="field form-group">
       <%= f.label :Anexos %> <br />
-      <%= f.file_field :upload, multiple: true %>
+      <%= f.file_field :documents, multiple: true %>
     </div>
 
     <div class="actions">

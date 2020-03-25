@@ -8,7 +8,7 @@ class CreateOfficeVisits < ActiveRecord::Migration[5.0]
     	t.integer :payment_method
     	t.string :treatment
     	t.float :value
-    	t.json :upload
+    	t.json :documents
       t.timestamps
     end
   end

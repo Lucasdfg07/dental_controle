@@ -1,29 +1,43 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
 
-<h1>Spents</h1>
+<h3>Cadastrar Gastos</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Value</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<section class="row mb-4 text-center">
+  <section class="col-md-4">
+    <%= render 'form', spent: @spent %>
+  </section>
 
-  <tbody>
-    <% @spents.each do |spent| %>
-      <tr>
-        <td><%= spent.value %></td>
-        <td><%= spent.description %></td>
-        <td><%= link_to 'Show', spent %></td>
-        <td><%= link_to 'Edit', edit_spent_path(spent) %></td>
-        <td><%= link_to 'Destroy', spent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <section class="col-md-8 mt-4">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Pagamento (R$)</th>
+          <th>Descrição</th>
+          <th>Criado em</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-<br>
+      <tbody>
+        <% @spents.each do |spent| %>
 
-<%= link_to 'New Spent', new_spent_path %>
+          <% content_tag :div do %>
+            <%= @count += 1 %>
+          <% end %>
+          <tr>
+            <td><%= @count %></td>
+            <td><%= spent.value %></td>
+            <td><%= spent.description %></td>
+            <td><%= spent.created_at %></td>
+            <td><%= link_to 'Editar', edit_spent_path(spent), class: 'btn btn-dark' %></td>
+            <td><%= link_to 'Apagar', spent, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @spents %>
+  </section>
+</section>

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20200324171947) do
     t.integer  "payment_method"
     t.string   "treatment"
     t.float    "value"
-    t.string   "upload"
+    t.json     "documents"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["patient_id"], name: "index_office_visits_on_patient_id", using: :btree
@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(version: 20200324171947) do
   end
 
   create_table "spents", force: :cascade do |t|
-    t.integer  "patient_id"
+    t.integer  "user_id"
     t.float    "value"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["patient_id"], name: "index_spents_on_patient_id", using: :btree
+    t.index ["user_id"], name: "index_spents_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

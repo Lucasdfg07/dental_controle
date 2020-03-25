@@ -22,12 +22,12 @@
 
   <p>
     <strong>Data do Atendimento:</strong>
-    <%= @office_visit.created_at.strftime("%d/%m/%Y") %> 
+    <%= @office_visit.created_at %> 
   </p>
 
   <p>
     <strong>Consulta marcada para:</strong>
-    <%= @office_visit.date.strftime("%d/%m/%Y") %> 
+    <%= @office_visit.date %> 
     <%= @office_visit.hour %>
   </p>
 </section>

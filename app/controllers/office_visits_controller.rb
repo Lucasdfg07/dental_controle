@@ -1,10 +1,19 @@
 class OfficeVisitsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_office_visit, only: [:show, :edit, :update, :destroy]
   before_action :set_patient, only: [:index, :new]
 
 
   def index
-    @office_visits = OfficeVisit.where(patient: @patient)
+    @q = OfficeVisit.ransack(params[:q])
+    @office_visits = @q.result.where(patient: @patient).paginate(page: params[:page], per_page: 10)
+    
+
+    if params[:page].present? && params[:page] > "1"
+      @count = (params[:page].to_i - 1) * 10
+    else
+      @count = 0
+    end
   end
 
 
@@ -67,6 +76,6 @@ class OfficeVisitsController < ApplicationController
     end
 
     def office_visit_params
-      params.require(:office_visit).permit(:patient_id, :date, :hour, :status, :payment_method, :treatment, :value, :upload)
+      params.require(:office_visit).permit(:patient_id, :date, :hour, :status, :payment_method, :treatment, :value, {documents: []})
     end
 end

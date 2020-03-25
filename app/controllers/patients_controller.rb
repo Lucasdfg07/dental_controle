@@ -1,10 +1,18 @@
 class PatientsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
 
   def index
     @q = Patient.ransack(params[:q])
-    @patients = @q.result(distinct: true).where(user: current_user)
+    @patients = @q.result(distinct: true).where(user: current_user).paginate(page: params[:page], per_page: 10)
+    
+
+    if params[:page].present? && params[:page] > "1"
+      @count = (params[:page].to_i - 1) * 10
+    else
+      @count = 0
+    end
   end
 
 
@@ -27,7 +35,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, notice: 'Paciente criado com sucesso!' }
+        format.html { redirect_to patients_path, notice: 'Paciente criado com sucesso!' }
         format.json { render :show, status: :created, location: @patient }
       else
         format.html { render :new }
