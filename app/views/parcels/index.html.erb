@@ -26,18 +26,22 @@ Paciente: <b><%= @office_visit.patient.name %></b>
       </thead>
 
       <tbody>
-        <% @parcels.each do |parcel| %>
-          <% content_tag :div do %>
-            <%= @count += 1 %>
-          <% end %>
+        <% if @parcels.count > 0 %>
+          <% @parcels.each do |parcel| %>
+            <% content_tag :div do %>
+              <%= @count += 1 %>
+            <% end %>
 
-          <tr>
-            <td><%= @count %></td>
-            <td><%= parcel.value %></td>
-            <td><%= parcel.created_at %></td>
-            <td><%= parcel.observation %></td>
-            <td><%= link_to 'Apagar', parcel, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-          </tr>
+            <tr>
+              <td><%= @count %></td>
+              <td><%= parcel.value %></td>
+              <td><%= parcel.created_at %></td>
+              <td><%= parcel.observation %></td>
+              <td><%= link_to 'Apagar', parcel, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <td colspan="5">Não existem gastos cadastrados ainda.</td>
         <% end %>
       </tbody>
     </table>

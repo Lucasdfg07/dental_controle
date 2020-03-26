@@ -41,29 +41,33 @@
   </thead>
 
   <tbody>
-    <% @office_visits.each do |office_visit| %>
-      <% content_tag :div do %>
-        <%= @count += 1 %>
-      <% end %>
+    <% if @office_visits.count > 0 %>
+      <% @office_visits.each do |office_visit| %>
+        <% content_tag :div do %>
+          <%= @count += 1 %>
+        <% end %>
 
-      <tr>
-        <td><b><%= @count %></b></td>
-        <td><%= (office_visit.payment_method.present?) ? office_visit.payment_method : '-' %></td>
-        <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
-        <td><%= (office_visit.value.present?) ? office_visit.value : '-' %></td>
-        <td><%= office_visit.date %> <%= office_visit.hour %></td>
-        <td>
-          <% office_visit.documents.each_with_index do |document, index| %>
-            <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
-            <br />
-          <% end %>
-        </td>
-        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
-        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
-        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Recebimento', parcels_path(office: office_visit, patient: params[:id]), class: 'btn btn-success' %></td>
-        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-      </tr>
+        <tr>
+          <td><b><%= @count %></b></td>
+          <td><%= (office_visit.payment_method.present?) ? office_visit.payment_method : '-' %></td>
+          <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+          <td><%= (office_visit.value.present?) ? office_visit.value : '-' %></td>
+          <td><%= office_visit.date %> <%= office_visit.hour %></td>
+          <td>
+            <% office_visit.documents.each_with_index do |document, index| %>
+              <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
+              <br />
+            <% end %>
+          </td>
+          <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
+          <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
+          <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Recebimento', parcels_path(office: office_visit, patient: params[:id]), class: 'btn btn-success' %></td>
+          <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="11">Não existem consultas cadastradas ainda.</td>
     <% end %>
   </tbody>
 </table>
