@@ -21,22 +21,26 @@
   </thead>
 
   <tbody>
-    <% @patients.each do |patient| %>
-      <% content_tag :div do %>
-        <%= @count += 1 %>
-      <% end %>
+    <% if @patients.count > 0 %>
+      <% @patients.each do |patient| %>
+        <% content_tag :div do %>
+          <%= @count += 1 %>
+        <% end %>
 
-      <tr>
-        <td><b><%= @count %></b></td>
-        <td><%= patient.name %></td>
-        <td><%= patient.document %></td>
-        <td><%= patient.telephone %></td>
-        <td><%= link_to 'Consultas', office_visits_path(id: patient), class: 'btn btn-success' %></td>
-        <td><%= link_to 'Agendar', new_office_visit_path(id: patient), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Exibir', patient, class: 'btn btn-info' %></td>
-        <td><%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-dark' %></td>
-        <td><%= link_to 'Apagar', patient, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-      </tr>
+        <tr>
+          <td><b><%= @count %></b></td>
+          <td><%= patient.name %></td>
+          <td><%= patient.document %></td>
+          <td><%= patient.telephone %></td>
+          <td><%= link_to 'Consultas', office_visits_path(id: patient), class: 'btn btn-success' %></td>
+          <td><%= link_to 'Agendar', new_office_visit_path(id: patient), class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Exibir', patient, class: 'btn btn-info' %></td>
+          <td><%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-dark' %></td>
+          <td><%= link_to 'Apagar', patient, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="9">Não existem pacientes cadastrados ainda.</td>
     <% end %>
   </tbody>
 </table>

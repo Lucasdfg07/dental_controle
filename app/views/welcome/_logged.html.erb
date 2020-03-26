@@ -46,26 +46,30 @@
   </thead>
 
   <tbody>
-    <% @office_visits.each do |office_visit| %>
-      <% content_tag :div do %>
-        <%= @count += 1 %>
-      <% end %>
+    <% if @office_visits.count > 0 %>
+      <% @office_visits.each do |office_visit| %>
+        <% content_tag :div do %>
+          <%= @count += 1 %>
+        <% end %>
 
-      <tr>
-        <td><b><%= @count %></b></td>
-        <td><%= office_visit.patient.name%></td>
-        <td><%= office_visit.date %> <%= office_visit.hour %></td>
-        <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
-        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
-        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
-        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-      </tr>
+        <tr>
+          <td><b><%= @count %></b></td>
+          <td><%= office_visit.patient.name%></td>
+          <td><%= office_visit.date %> <%= office_visit.hour %></td>
+          <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+          <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
+          <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
+          <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="8">Não existem pacientes marcados pra hoje.</td>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Ver Agenda Completa', graphs_path, class: 'btn btn-info' %>
+<%= link_to 'Ver Agenda Completa', calendar_index_path, class: 'btn btn-info' %>
 
 <hr />
 

@@ -21,5 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :calendar
+
   root 'welcome#index'
 end
