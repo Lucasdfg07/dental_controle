@@ -5,6 +5,8 @@
 @import "shared/navbar.scss";
 @import "shared/footer.scss";
 
+@import 'morrisjs-rails';
+
 .logged_container {
 	margin-top: 100px;
 }
@@ -37,4 +39,9 @@ table th, table tr, table td {
 }
 #alert {
 	background-color: rgba(200,20,20,0.6);
+}
+
+.nav-item input {
+	background: none;
+	border: none;
 }

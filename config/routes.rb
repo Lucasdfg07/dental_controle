@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :graphs, only: [:index] do
+  	collection do
+      get 'index'
+  		post 'index'
+  	end
+  end
+
   resources :parcels
   
   resources :office_visits
@@ -6,7 +13,13 @@ Rails.application.routes.draw do
   resources :spents
   resources :patients
   devise_for :users, controllers: { registrations: 'registrations' }
-  resources :welcome
+  
+  resources :welcome, only: [:index] do
+    collection do
+      get 'index'
+      post 'index'
+    end
+  end
 
   root 'welcome#index'
 end

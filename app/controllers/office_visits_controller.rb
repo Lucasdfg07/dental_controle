@@ -37,7 +37,11 @@ class OfficeVisitsController < ApplicationController
 
     respond_to do |format|
       if @office_visit.save
-        format.html { redirect_to patients_path, notice: 'Office visit was successfully created.' }
+        if params[:welcome].present?
+          format.html { redirect_to patients_path, notice: 'Office visit was successfully created.' }
+        else
+          format.html { redirect_to root_path, notice: 'Office visit was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @office_visit }
       else
         format.html { render :new }
@@ -50,7 +54,11 @@ class OfficeVisitsController < ApplicationController
   def update
     respond_to do |format|
       if @office_visit.update(office_visit_params)
-        format.html { redirect_to office_visits_path(id: params[:patient]), notice: 'Office visit was successfully updated.' }
+        if params[:welcome].present?
+          format.html { redirect_to root_path, notice: 'Office visit was successfully updated.' }
+        else
+          format.html { redirect_to office_visits_path(id: params[:patient]), notice: 'Office visit was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @office_visit }
       else
         format.html { render :edit }

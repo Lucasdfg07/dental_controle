@@ -37,11 +37,11 @@
       <th>Id</th>
       <th>Nome</th>
       <th>Data marcada para Consulta</th>
-      <th>Visualizar Anexos</th>
+      <th>Tratamento realizado</th>
       <th>Remarcar Paciente</th>
       <th>Cadastrar Atendimento</th>
       <th>Exibir</th>
-      <th colspan="2"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -55,18 +55,68 @@
         <td><b><%= @count %></b></td>
         <td><%= office_visit.patient.name%></td>
         <td><%= office_visit.date %> <%= office_visit.hour %></td>
-        <td>
-          <% office_visit.documents.each_with_index do |document, index| %>
-            <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
-            <br />
-          <% end %>
-        </td>
-        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id]), class: 'btn btn-secondary' %></td>
-        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id]), class: 'btn btn-info' %></td>
+        <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+        <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
+        <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
         <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Recebimento', parcels_path(office: office_visit, patient: params[:id]), class: 'btn btn-success' %></td>
         <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Ver Agenda Completa', graphs_path, class: 'btn btn-info' %>
+
+<hr />
+
+<section class="row text-center">
+  <section class="col-md-5">
+    <section class="page-header border-bottom pb-2">
+      <h3>Proporção de pagamento</h3>
+    </section>
+
+    <section class="graph">
+      <section id="donut_graph"></section>
+    </section>
+  </section>
+
+  <section class="col-md-7">
+    <section class="page-header border-bottom pb-2">
+      <h3>Gráfico dos valores semanais</h3>
+    </section>
+
+    <section class="graph">
+      <%= content_tag :div, "", id: "line_graph", data: {graph: week_data} %>
+    </section>
+  </section>
+</section>  
+
+<%= javascript_tag do -%>
+  $( document ).on('turbolinks:load', function() {
+    Morris.Donut({
+      element: 'donut_graph',
+      data: [
+        {value: <%= @money %>, label: 'Dinheiro'},
+        {value: <%= @card %>, label: 'Cartão'},
+        {value: <%= @health_insurance %>, label: 'Convênio'}
+      ],
+      formatter: function (x) {
+        conta = parseFloat((x*100)/<%= @total %>).toFixed(2) + "%";
+        return conta;
+      }
+    }).on('click', function(i, row){
+      console.log(i, row);
+    });
+
+    Morris.Line({
+      element: 'line_graph',
+      data: $('#line_graph').data('graph'),
+      xkey: 'created_at',
+      ykeys: ['collected', 'spent'],
+      labels: ['Quantia Recebida (R$)','Quantia Gasta (R$)'],
+      lineColors: ['#007bff', '#DC143C']
+    }).on('click', function(i, row){
+      console.log(i, row);
+    });
+  });
+<% end -%>

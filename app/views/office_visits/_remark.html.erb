@@ -1,6 +1,9 @@
 <h1>Remarcar Atendimento</h1>
 
   <%= form_for(@office_visit) do |f| %>
+    <!-- If click from welcome path -->
+    <%= hidden_field_tag :welcome, params[:welcome] %>
+
     <%= hidden_field_tag :patient, params[:patient] %>
     
     <% if @office_visit.errors.any? %>

@@ -24,6 +24,10 @@ gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick', '~> 4.3'
 
+# Gem to generate graphs
+gem 'morrisjs-rails'
+gem 'raphael-rails'
+
 # Paginate
 gem 'will_paginate', '~> 3.1.0'
 
