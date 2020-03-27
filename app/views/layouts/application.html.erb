@@ -13,12 +13,22 @@
   </head>
 
   <body>  	
+    <% if alert %>
+      <p class="alert alert-danger alert"><%= alert %></p>
+    <% end %>
+
+    <% if notice %>
+      <p class="alert alert-success notice"><%= notice %></p>
+    <% end %>
+
+
     <% if user_signed_in? %>
 	    <%= render 'shared/navbar_logged' %>
       
       <section class="container logged_container">
         <%= yield %> 
       </section>
+      
     <% else %>
       <%= render 'shared/navbar_unlogged' %>
       <%= yield %> 

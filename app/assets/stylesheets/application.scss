@@ -35,14 +35,16 @@ table th, table tr, table td {
 	text-align: center;
 }
 
-#notice {
-	background-color: rgba(20,20,200,0.6);
-}
-#alert {
-	background-color: rgba(200,20,20,0.6);
-}
-
 .nav-item input {
 	background: none;
 	border: none;
+}
+.alert, .notice {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 9999;
+  opacity: 0.7;
 }

@@ -12,8 +12,21 @@ module DentalControle
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = "pt-BR"
+    
     Time::DATE_FORMATS[:default] = "%d/%m/%Y %H:%M"
- 	Date::DATE_FORMATS[:default] = "%d/%m/%Y"
- 	config.time_zone = 'Brasilia'
+ 	  Date::DATE_FORMATS[:default] = "%d/%m/%Y"
+
+   	config.time_zone = 'Brasilia'
+   	config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.gmail.com',
+      port:                 25,
+      domain:               'gmail.com',
+      user_name:            "#{ENV["EMAIL_KEY"]}",
+      password:             "#{ENV["PASSWORD_KEY"]}",
+      authentication:       :plain,
+      enable_starttls_auto: true
+    }
   end
 end

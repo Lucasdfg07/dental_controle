@@ -9,7 +9,6 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
 
 # PWA
 gem 'serviceworker-rails'
@@ -27,6 +26,9 @@ gem 'mini_magick', '~> 4.3'
 # Gem to generate graphs
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+
+# Dotenv
+gem 'dotenv-rails'
 
 # Paginate
 gem 'will_paginate', '~> 3.1.0'

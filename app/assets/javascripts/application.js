@@ -23,4 +23,10 @@ $( document ).on('turbolinks:load', function() {
   $('.carousel').carousel({
   	interval: 3000
   });
+
+  $(function() {
+    setTimeout(function(){
+      $('.alert').slideUp(500);
+    }, 2500);
+  });
 });

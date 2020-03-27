@@ -225,4 +225,38 @@
 			</p>
 		</section>
 	</section>
+
+	<section class="contact text-center">
+      <section class="page-header pb-2 border-bottom">
+        <h3>Contato</h3>
+      </section>
+
+      <br />
+
+      <%= form_for @contact, url: {action: :send_mail, method: :post} do |f| %>
+        <section class="form-group">
+          <%= f.label :nome %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Digite seu nome *", required: true %>
+        </section>
+
+        <section class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: "form-control", placeholder: "Digite seu email *", required: true %>
+        </section>
+
+        <section class="form-group">
+          <%= f.label :telefone %>
+          <%= f.text_field :telephone, class: "form-control", placeholder: "(99) 99999-9999" %>
+        </section>
+
+        <section class="form-group textarea-group">
+          <%= f.label :mensagem %>
+          <%= f.text_area :message, class: "form-control", placeholder: "Digite sua mensagem *", required: true %>
+        </section>
+
+        <section class="form-group actions">
+          <%= f.submit "Enviar", class: 'btn btn-primary' %>
+        </section>
+      <% end %>
+    </section>
 </section>

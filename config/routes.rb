@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     collection do
       get 'index'
       post 'index'
+      post 'send_mail'
     end
   end
 

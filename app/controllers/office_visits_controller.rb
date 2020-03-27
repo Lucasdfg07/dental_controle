@@ -51,6 +51,8 @@ class OfficeVisitsController < ApplicationController
         format.json { render json: @office_visit.errors, status: :unprocessable_entity }
       end
     end
+
+    SendSMS.new(@office_visit).mark
   end
 
 
@@ -67,6 +69,10 @@ class OfficeVisitsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @office_visit.errors, status: :unprocessable_entity }
       end
+    end
+
+    if params[:office_visit][:date].present? && params[:office_visit][:hour].present?
+      SendSMS.new(@office_visit).remark
     end
   end
 
