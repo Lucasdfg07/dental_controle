@@ -13,3 +13,12 @@ User.create(
 		payment_status: 0, 
 		payment_expiration: Date.today + 1.month
 	)
+
+User.create(
+		name: 'Admin', 
+		email: 'admin@dentalcontrole.com', 
+		password: 'admin123', 
+		payment_status: 0, 
+		role: 1,
+		payment_expiration: Date.today + 1.month
+	)

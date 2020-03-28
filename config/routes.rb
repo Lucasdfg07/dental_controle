@@ -36,4 +36,11 @@ Rails.application.routes.draw do
   resources :calendar
 
   root 'welcome#index'
+  
+
+  namespace :superuser do
+    get 'welcome/index'
+
+    resources :users
+  end
 end

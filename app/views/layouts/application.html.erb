@@ -23,7 +23,12 @@
 
 
     <% if user_signed_in? %>
-	    <%= render 'shared/navbar_logged' %>
+
+      <% if current_user.admin? %>
+        <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "nav_li float-right btn btn-danger mr-4 logout_admin"  %>
+      <% else %>
+	      <%= render 'shared/navbar_logged' %>
+      <% end %>
       
       <section class="container logged_container">
         <%= yield %> 

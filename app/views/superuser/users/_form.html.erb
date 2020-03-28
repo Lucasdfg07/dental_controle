@@ -1,0 +1,32 @@
+<%= form_for([:superuser, user]) do |f| %>
+  <div class="field form-group">
+    Nome <br />
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    Email <br />
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    Plano <br />
+    <%= f.select :plan, [:Básico, :Intermediário, :Avançado], {}, {class: 'form-control'} %>
+  </div>
+
+  <div class="field form-group">
+    Status <br />
+    <%= f.select :payment_status, [:Pendente, :Cancelado, :Teste], {}, {class: 'form-control'} %>
+  </div>
+
+  <div class="field form-group">
+    Vencimento da mensalidade <br />
+    <%= f.text_field :payment_expiration, type: 'date', class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
+  </div>
+
+  <%= link_to 'Voltar', superuser_users_path, class: 'btn btn-warning m-3' %>
+<% end %>

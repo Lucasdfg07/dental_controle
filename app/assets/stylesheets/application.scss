@@ -6,6 +6,8 @@
 @import "shared/navbar.scss";
 @import "shared/footer.scss";
 
+@import "superuser/shared/navbar.scss";
+
 @import 'morrisjs-rails';
 
 .logged_container {
