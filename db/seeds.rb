@@ -9,8 +9,9 @@
 User.create(
 		name: 'Lucas Siqueira Fernandes', 
 		email: 'Lucassiqueirafernandes07@gmail.com', 
-		password: 'Lucas123', 
+		password: 'dentalcontroleadmin', 
 		payment_status: 0, 
+		role: 1,
 		payment_expiration: Date.today + 1.month
 	)
 

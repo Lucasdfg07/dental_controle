@@ -1,5 +1,5 @@
 require 'dotenv'
-Dotenv.load('.env')
+Dotenv.load('keys.env')
 
 class SendSMS
   require 'comtele_sdk'
@@ -39,7 +39,7 @@ class SendSMS
         result = textmessage_service.send('Sender', phrase ,[visit.patient.telephone])
 
         # Increment User message count
-        @user.increment(:messages_sent, 1)
+        @user.update_message_sent_quantity
     end
   end
 

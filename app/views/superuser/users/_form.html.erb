@@ -20,8 +20,8 @@
   </div>
 
   <div class="field form-group">
-    Vencimento da mensalidade <br />
-    <%= f.text_field :payment_expiration, type: 'date', class: 'form-control' %>
+    Vencimento da mensalidade (atual: <b><%= user.payment_expiration %></b>) <br />
+    <%= f.text_field :payment_expiration, type: 'date', class: 'form-control', required: true %>
   </div>
 
   <div class="actions">

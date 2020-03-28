@@ -1,44 +1,48 @@
 <section class="text-center">
 	<p>
+		Sr(a) <%= current_user.name %> <br />
 		Abaixo encontram-se os usuários cadastrados no sistema!
 	</p>
 
+	<%= link_to 'Novo Usuário', new_superuser_user_path, class: 'btn btn-primary mb-3' %>
 
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nome</th>
-				<th>Data de vencimento da mensalidade</th>
-				<th>Número de mensagens enviadas (mês)</th>
-				<th>Plano</th>
-				<th>Status</th>
-				<th></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<% @users.each do |user| %>
-				<% content_tag :div do %>
-	            	<%= @count += 1 %>
-	          	<% end %>
-
+	<section class="table_mobile">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td><%= @count %></td>
-					<td><%= user.name %></td>
-					<% if user.payment_expiration < Date.today %>
-						<td style="color: red;"><%= user.payment_expiration %></td>
-					<% else %>
-						<td style="color: blue;"><%= user.payment_expiration %></td>
-					<% end %>
-					<td><%= user.messages_sent %></td>
-					<td><%= user.plan %></td>
-					<td><%= user.payment_status %></td>
-					<td><%= link_to 'Editar', edit_superuser_user_path(user), class: 'btn btn-dark' %></td>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Data de vencimento da mensalidade</th>
+					<th>Número de mensagens enviadas (mês)</th>
+					<th>Plano</th>
+					<th>Status</th>
+					<th></th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+
+			<tbody>
+				<% @users.each do |user| %>
+					<% content_tag :div do %>
+		            	<%= @count += 1 %>
+		          	<% end %>
+
+					<tr>
+						<td><%= @count %></td>
+						<td><%= user.name %></td>
+						<% if user.payment_expiration < Date.today %>
+							<td style="color: red;"><%= user.payment_expiration %></td>
+						<% else %>
+							<td style="color: blue;"><%= user.payment_expiration %></td>
+						<% end %>
+						<td><%= user.messages_sent %></td>
+						<td><%= user.plan %></td>
+						<td><%= user.payment_status %></td>
+						<td><%= link_to 'Editar', edit_superuser_user_path(user), class: 'btn btn-dark' %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</section>
 
 	<%= will_paginate @users %>
 

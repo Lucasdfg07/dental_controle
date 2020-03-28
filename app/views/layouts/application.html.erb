@@ -31,7 +31,21 @@
       <% end %>
       
       <section class="container logged_container">
-        <%= yield %> 
+        <% if current_user.payment_status == 'Cancelado' %>
+          <section class="text-center">
+            <hr />
+              <p>
+                Conta temporariamente indisponível até o pagamento da mensalidade.
+              </p>
+
+              <p>
+                Assim que o pagamento for efetuado, em até 48 horas a conta será desbloqueada!
+              </p>
+            <hr />
+          </section>
+        <% else %>
+          <%= yield %>
+        <% end %> 
       </section>
       
     <% else %>

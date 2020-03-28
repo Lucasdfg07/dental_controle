@@ -38,28 +38,25 @@ module Superuser
 
     def create
       @user = User.new(user_params)
-
-      respond_to do |format|
-        if @user.save
-          format.html { redirect_to superuser_users_path, notice: 'Usuário criado com sucesso!' }
-          format.json { render :show, status: :created, location: @user }
-        else
-          format.html { render :new }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+      @user.password = 'dentalcontrole123'
+      
+      if @user.save
+        redirect_to superuser_users_path, notice: 'Usuário criado com sucesso!'
+      else
+        redirect_to superuser_users_path, alert: 'Erro na atualização do usuário'
       end
     end
 
 
     def update
-      respond_to do |format|
-        if @user.update(user_params)
-          format.html { redirect_to superuser_users_path, notice: 'Usuário editado com sucesso!' }
-          format.json { render :show, status: :ok, location: @user }
-        else
-          format.html { render :edit }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+      if params[:user][:payment_expiration].to_date != @user.payment_expiration
+        @user.reset_mensal_messages_quant
+      end
+
+      if @user.update(user_params)
+        redirect_to superuser_users_path, notice: 'Usuário editado com sucesso!'
+      else
+        redirect_to superuser_users_path, alert: 'Erro na atualização do usuário'
       end
     end
 
