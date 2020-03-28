@@ -1,0 +1,37 @@
+<nav class="navegacao navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <%= link_to root_path do %>
+    <%= image_tag 'molar.png', alt: 'Dental Controle icon' %>
+  <% end %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#presentation">Dental Controle <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#funcionalidades">Funcionalidades</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#planos">Planos</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#como_acessar">Como Acessar</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#contact">Contato</a>
+      </li>
+    </ul>
+
+    <section class="pull-right">
+      <%= link_to "Entrar", new_user_session_path, :class => 'btn btn-primary ' %>
+    </section>
+  </div>
+</nav>

@@ -1,0 +1,40 @@
+<h3>Cadastrar Gastos</h3>
+
+<section class="row mb-4 text-center">
+  <section class="col-md-4">
+    <%= render 'form', spent: @spent %>
+  </section>
+
+  <section class="col-md-8 mt-4">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Pagamento (R$)</th>
+          <th>Descrição</th>
+          <th>Criado em</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @spents.each do |spent| %>
+
+          <% content_tag :div do %>
+            <%= @count += 1 %>
+          <% end %>
+          <tr>
+            <td><%= @count %></td>
+            <td><%= spent.value %></td>
+            <td><%= spent.description %></td>
+            <td><%= spent.created_at %></td>
+            <td><%= link_to 'Editar', edit_spent_path(spent), class: 'btn btn-dark' %></td>
+            <td><%= link_to 'Apagar', spent, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @spents %>
+  </section>
+</section>

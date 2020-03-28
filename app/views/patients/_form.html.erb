@@ -1,0 +1,37 @@
+<%= form_for(patient) do |f| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% patient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :nome_do_paciente %> <br />
+    <%= f.text_field :name, placeholder: 'Nome do Paciente', class: 'form-control', required: true %>
+  </div>
+
+  <div class="field cpf form-group">
+    <%= f.label :CPF %> <br />
+    <%= f.text_field :document, placeholder: '999.999.999-99', class: 'form-control', id: 'cpf_input'  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :endereço %> <br />
+    <%= f.text_area :address, placeholder: 'Endereço do paciente', class: 'form-control', required: true  %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :telefone %> <br />
+    <%= f.text_field :telephone, placeholder: '99 9999-9999', class: 'form-control', required: true  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+  </div>
+<% end %>

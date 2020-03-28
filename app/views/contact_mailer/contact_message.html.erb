@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+    <h1>Mensagem de contato</h1>
+    <h2>Data de envio: <%= Time.now.strftime("%d/%m/%Y %H:%M") %></h2>
+
+    <p><strong>Usuário(a): </strong><%= @contact.name %></p>
+
+    <p><strong>Email: </strong><%= @contact.email %></p>
+
+    <p><strong>Telefone: </strong><%= @contact.telephone %></p>
+
+    <p><strong>Mensagem: </strong><%= @contact.message %></p>
+    <p></p>
+  </body>
+</html>

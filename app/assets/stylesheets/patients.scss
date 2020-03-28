@@ -1,0 +1,32 @@
+// Place all the styles related to the patients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+	box-shadow: -2px 2px 15px rgba(10,10,10,0.2);
+}
+.field, .actions {
+	margin-top: 30px;
+
+	textarea {
+		height: 200px;
+	}
+}
+.doc_btn {
+	box-shadow: -2px 2px 10px rgba(10,10,10,0.3);
+	border-radius: 10px;
+	padding: 5px;
+	margin: 20px;
+}
+.show {
+	box-shadow: -2px 2px 10px rgba(10,10,10,0.4);
+	padding: 10px;
+	
+	p {
+		border-bottom: 1px solid rgba(200,200,200,0.7);
+		padding: 5px;
+	}
+}
+.btn_search {
+	border: 1px solid rgba(200,200,200,0.7);
+}

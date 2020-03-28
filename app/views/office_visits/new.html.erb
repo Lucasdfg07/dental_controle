@@ -1,0 +1,40 @@
+<section class="text-center mb-4">
+	<h1>Cadastro de consulta</h1>
+
+	<%= form_for(@office_visit) do |f| %>
+	  <%= f.hidden_field :patient_id, value: @patient.id %>
+
+	  <% if @office_visit.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@office_visit.errors.count, "error") %> prohibited this office_visit from being saved:</h2>
+
+	      <ul>
+	      <% @office_visit.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <section class="row">
+		  <div class="field col-md-4">
+		  	Data Atual: <b><%= Date.today.strftime("%d/%m/%Y") %></b> <br />
+		  	Confirmado para a data e hora <br />
+		    <%= f.text_field :date, type: 'date', required: true %>
+		    <%= f.text_field :hour, type: 'time', required: true %>
+
+		    <div class="actions">
+			  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+
+			  <br /> <br />
+
+			  <%= link_to 'Voltar', :back, class: 'btn btn-warning' %>
+			</div>
+		  </div>
+
+		  <div class="field col-md-8">
+		  	<%= render 'calendar/show' %>
+		  </div>
+	  </section>
+	<% end %>
+</section>

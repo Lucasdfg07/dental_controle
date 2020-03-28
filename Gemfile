@@ -9,7 +9,38 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
+
+# Generate PDF
+gem 'prawn-rails'
+
+# PWA
+gem 'serviceworker-rails'
+
+# Máscara input
+gem 'maskedinput-rails', '~> 1.3', '>= 1.3.1.0'
+
+# Search
+gem 'ransack'
+
+# Uploader
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick', '~> 4.3'
+
+# Group BY
+gem 'groupdate'
+
+# Gem to generate graphs
+gem 'morrisjs-rails'
+gem 'raphael-rails'
+
+# Dotenv
+gem 'dotenv-rails'
+
+# Paginate
+gem 'will_paginate', '~> 3.1.0'
+
+# Envio de SMS
+gem 'comtele_sdk'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

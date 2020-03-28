@@ -1,0 +1,11 @@
+<section class="text-center mb-4 col-md-4 offset-md-4">
+  <% if params[:register].present? %>
+    <%= render 'register' %>
+  <% elsif params[:remark].present? %>
+    <%= render 'remark' %>
+  <% end %>
+
+  <br />
+
+  <%= link_to 'Voltar', :back, class: 'btn btn-warning' %>
+</section>

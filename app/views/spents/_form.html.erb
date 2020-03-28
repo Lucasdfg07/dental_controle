@@ -1,0 +1,27 @@
+<%= form_for(spent) do |f| %>
+  <% if spent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(spent.errors.count, "error") %> prohibited this spent from being saved:</h2>
+
+      <ul>
+      <% spent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    Valor gasto <br />
+    <%= f.number_field :value, step: :any, placeholder: 'R$ 100,00', class: 'form-control', required: true %>
+  </div>
+
+  <div class="field form-group">
+    Descrição dos gastos <br />
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Atualizar', class: 'btn btn-primary' %>
+  </div>
+<% end %>

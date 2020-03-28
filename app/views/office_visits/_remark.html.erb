@@ -1,0 +1,32 @@
+<h1>Remarcar Atendimento</h1>
+
+  <%= form_for(@office_visit) do |f| %>
+    <!-- If click from welcome path -->
+    <%= hidden_field_tag :welcome, params[:welcome] %>
+
+    <%= hidden_field_tag :patient, params[:patient] %>
+    
+    <% if @office_visit.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@office_visit.errors.count, "error") %> prohibited this office_visit from being saved:</h2>
+
+        <ul>
+        <% @office_visit.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field form-group">
+      Confirmado para a data e hora <br />
+      <section class="row">
+        <%= f.text_field :date, type: 'date', class: 'form-control col-7 mr-3', required: true %>
+        <%= f.text_field :hour, type: 'time', class: 'form-control col-4', required: true %>
+      </section>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+    </div>
+  <% end %>

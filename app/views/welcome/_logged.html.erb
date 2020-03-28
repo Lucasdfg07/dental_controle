@@ -1,0 +1,130 @@
+<h3>Listagem de Pacientes</h3>
+
+<section class="row">
+	<section class="col-md-7">
+		Bem vindo(a) <b><%= current_user.name %></b> <br />
+	  	Data de expiração do sistema: <%= current_user.payment_expiration.strftime("%d / %m / %Y") %> <br />
+	  	Efetue o pagamento do sistema entre <b style="color: green;"><%= (current_user.payment_expiration - 1.week).strftime("%d / %m / %Y") %> e <%= current_user.payment_expiration.strftime("%d / %m / %Y") %></b>
+	</section>
+
+	<section class="col-md-5 perfil_image">
+		<%= image_tag(current_user.avatar.medium) if current_user.avatar.present? %>
+	</section>
+</section>
+<br /><br />
+
+<p>Abaixo encontra-se a lista de pacientes a serem atendidos hoje!</p>
+
+<hr />
+
+<span>Plano atual: <b><%= current_user.plan %></b></span>
+
+<%= search_form_for @q, url: root_path do |f| %>
+  <section class="form-group row">
+    <section class="col-9 form-group">
+      <%= f.select(:patient_name_eq, OfficeVisit.where(date: Date.today).collect {|office| [office.patient.name] }, {include_blank: 'Procure por um paciente'}, {class: 'form-control'}) %>
+    </section>
+
+    <section class="col-3">
+    	<%= f.submit 'Pesquisar', class: ' col-12 btn btn_search' %>
+    </section>
+  </section>
+<% end %>
+
+<table class="table table-hover text-center">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Data marcada para Consulta</th>
+      <th>Tratamento realizado</th>
+      <th>Remarcar Paciente</th>
+      <th>Cadastrar Atendimento</th>
+      <th>Exibir</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @office_visits.count > 0 %>
+      <% @office_visits.each do |office_visit| %>
+        <% content_tag :div do %>
+          <%= @count += 1 %>
+        <% end %>
+
+        <tr>
+          <td><b><%= @count %></b></td>
+          <td><%= office_visit.patient.name%></td>
+          <td><%= office_visit.date %> <%= office_visit.hour %></td>
+          <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+          <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
+          <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
+          <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="8">Não existem pacientes marcados pra hoje.</td>
+    <% end %>
+  </tbody>
+</table>
+
+<section class="text-center m-4">
+  <%= link_to 'Clique aqui para ver o relatório de pacientes', export_welcome_index_path %>
+</section>
+
+<%= link_to 'Ver Agenda Completa', calendar_index_path, class: 'btn btn-info' %>
+
+<hr />
+
+<section class="row text-center">
+  <section class="col-md-5">
+    <section class="page-header border-bottom pb-2">
+      <h3>Proporção de pagamento</h3>
+    </section>
+
+    <section class="graph">
+      <section id="donut_graph"></section>
+    </section>
+  </section>
+
+  <section class="col-md-7">
+    <section class="page-header border-bottom pb-2">
+      <h3>Gráfico dos valores semanais</h3>
+    </section>
+
+    <section class="graph">
+      <%= content_tag :div, "", id: "line_graph", data: {graph: week_data} %>
+    </section>
+  </section>
+</section>  
+
+<%= javascript_tag do -%>
+  $( document ).on('turbolinks:load', function() {
+    Morris.Donut({
+      element: 'donut_graph',
+      data: [
+        {value: <%= @money %>, label: 'Dinheiro'},
+        {value: <%= @card %>, label: 'Cartão'},
+        {value: <%= @health_insurance %>, label: 'Convênio'}
+      ],
+      formatter: function (x) {
+        conta = parseFloat((x*100)/<%= @total %>).toFixed(2) + "%";
+        return conta;
+      }
+    }).on('click', function(i, row){
+      console.log(i, row);
+    });
+
+    Morris.Line({
+      element: 'line_graph',
+      data: $('#line_graph').data('graph'),
+      xkey: 'created_at',
+      ykeys: ['collected', 'spent'],
+      labels: ['Quantia Recebida (R$)','Quantia Gasta (R$)'],
+      lineColors: ['#007bff', '#DC143C']
+    }).on('click', function(i, row){
+      console.log(i, row);
+    });
+  });
+<% end -%>

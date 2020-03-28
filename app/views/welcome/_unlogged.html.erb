@@ -1,0 +1,262 @@
+<section class="presentation text-center" id="presentation">
+	<section class="page-header pb-3 border-bottom">
+		<h2>Bem Vindo(a) ao Dental Controle</h2>
+	</section>
+
+	<section class="description">
+		<p>
+			Desenvolvido com o intuito de aumentar a performance e facilidade de trabalho do profissional, o Sistema de Cadastro e Monitoramento Odontológico vem com o objetivo de organizar o fluxo, quantidade e detalhamentos com relação à data de atendimento, tratamento realizado, forma de pagamento, entre outras qualidades.
+		</p>
+
+		<p>
+			O sistema também traz o diferencial de gráficos e demonstrações visuais do montante gasto com relação ao montante adquirido em períodos semanais, mensais e anuais pelos atendimentos prestados e cadastrados pelo dentista, realizando dentre outras funções para captação e organização dos pacientes.
+		</p>
+
+		<p>
+			<%= link_to 'Acessar', new_user_session_path, class: 'btn btn-info' %>
+		</p>
+	</section>
+</section>
+
+<hr />
+
+<section class="manual_pdf text-center">
+	<h4>Baixe nosso manual de utilização</h4>
+
+	<a href="/manual.pdf" class="btn btn-dark">Baixar PDF</a>
+</section>
+
+<hr />
+
+<section class="funcionalidades col-md-12" id="funcionalidades">
+    <section class="text-center">
+      <section class="page-header border-bottom col-md-12">
+        <h3>Funcionalidades</h3>
+      </section>
+    </section>
+
+    <br />
+
+    <section class="background_funcionalidades">
+      <section id="carousel" class="carousel slide" data-ride="carousel">
+        <section class="carousel-inner">
+          <section class="carousel-item active">
+            <section class="gestao">
+              <section class="page-header container pt-2 gestao_pacientes text-center border-bottom">
+                <h4>Gestão de Pacientes</h4>
+              </section>
+
+              <%= image_tag 'imagem_1.png', class: 'd-block', alt: 'Imagem de Gestão de Pacientes' %>
+            </section>
+          </section>
+
+          <section class="carousel-item">
+            <section class="sms text-center">
+              <section class="page-header container pt-2 envio_sms text-center border-bottom">
+                <h4>Envio de SMS</h4>
+              </section>
+
+              <br />
+
+              <%= image_tag 'iphone_sms.png', class: 'd-block', alt: 'Iphone com SMS na tela' %>
+            </section>
+          </section>
+
+          <section class="carousel-item">
+            <section class="listagem">
+              <section class="page-header container pt-2 listagem_consultas text-center border-bottom">
+                <h4>Gestão de Consultas</h4>
+              </section>
+
+              <%= image_tag 'imagem_2.png', class: 'd-block', alt: 'Imagem de Listagem de Consultas' %>
+            </section>
+          </section>
+
+          <section class="carousel-item">
+            <section class="graficos">
+              <section class="page-header container pt-2 graficos_rendimento text-center border-bottom">
+                <h4>Gráficos de Rendimento</h4>
+              </section>
+
+              <br />
+
+              <%= image_tag 'imagem_3.png', class: 'd-block', alt: 'Imagem de Gráficos de Rendimento' %>
+            </section>
+          </section>
+
+          <section class="carousel-item">
+            <section class="gastos text-center">
+              <section class="page-header container pt-2 controle_gastos text-center border-bottom">
+                <h4>Controle de Gastos</h4>
+              </section>
+
+              <br />
+
+              <%= image_tag 'imagem_4.png', class: 'd-block', alt: 'Imagem de Controle de Gastos' %>
+            </section>
+          </section>
+        </section>
+
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Próximo</span>
+        </a>
+      </section>
+    </section>
+</section>
+
+<hr />
+
+<section class="container">
+	<section class="planos text-center" id="planos">
+		<section class="page-header pb-2 border-bottom">
+			<h3>Planos</h3>
+		</section>
+
+		<section class="row">
+			<section class="col-md-4">
+				<section class="plano_div">
+					<section class="title pb-2 border-bottom">
+						<p>Somente <b>R$ 90,00/mês</b></p>
+					</section>
+
+					<section class="description">
+						<ul>
+							<li>Envio de até 250 mensagens/mês.</li>
+							<li>Armazenamento ilimitado de consultas.</li>
+							<li>Armazenamento ilimitado de pacientes.</li>
+						</ul>
+					</section>
+
+					<br />
+
+					<a href="https://pag.ae/7VuqEfbw9" class='btn btn-success'>Contratar Agora</a>
+				</section>
+			</section>
+
+			<section class="col-md-4">
+				<section class="plano_div">
+					<section class="title pb-2 border-bottom">
+						<p>Somente <b>R$ 120,00/mês</b></p>
+					</section>
+
+					<section class="description">
+						<ul>
+							<li>Envio de até 400 mensagens/mês.</li>
+							<li>Armazenamento ilimitado de consultas.</li>
+							<li>Armazenamento ilimitado de pacientes.</li>
+						</ul>
+					</section>
+
+					<br />
+
+					<a href="https://pag.ae/7VuqJu8po" class='btn btn-success'>Contratar Agora</a>
+				</section>
+			</section>
+
+			<section class="col-md-4">
+				<section class="plano_div">
+					<section class="title pb-2 border-bottom">
+						<p>Somente <b>R$ 150,00/mês</b></p>
+					</section>
+
+					<section class="description">
+						<ul>
+							<li>Envio de até 600 mensagens/mês.</li>
+							<li>Armazenamento ilimitado de consultas.</li>
+							<li>Armazenamento ilimitado de pacientes.</li>
+						</ul>
+					</section>
+
+					<br />
+
+					<a href="https://pag.ae/7VuqJJE2J" class='btn btn-success'>Contratar Agora</a>
+				</section>
+			</section>
+		</section>
+	</section>
+
+	<section class="como_acessar" id="como_acessar">
+		<section class="page-header pb-2 border-bottom text-center">
+			<h3>Como Acessar?</h3>
+		</section>
+
+		<section class="description text-center pt-3">
+			<p>
+				Após a aquisição do sistema Dental Controle, clicando em "Contratar Agora" nos botões acima, seremos notificados com as informações preenchidas no processo da compra.
+			</p>
+
+			<p>
+				Assim, quando o pagamento for efetuado, e o sistema processá-lo, sua conta será criada e você será notificado por E-mail com as informações de acesso.
+			</p>
+
+			<p>
+				Após o envio das informações de acesso, será contabilizado um prazo de 5 semanas para a renovação do plano.
+			</p>
+
+			<p>
+				Para modificação do plano, realize o pagamento do novo plano desejado. Assim que o pagamento for processado, seu plano será automaticamente modificado.
+			</p>
+		</section>
+
+		<p>
+			Att, <br />
+			Equipe Dental Controle.
+		</p>
+	</section>
+
+	<section class="teste_gratis text-center border-top">
+		<section class="page-header pb-2 pt-3 text-center">
+			<h3>Cadastre seu teste grátis!</h3>
+		</section>
+
+		<section class="description">
+			<p>
+				Envie um email, preenchendo o formulário abaixo, com a mensagem "Solicito teste grátis"!
+
+				<br />
+
+				Dentro de 24 horas do recebimento do seu email, responderemos o email com seus dados de acesso com a validade de 7 dias.
+			</p>
+		</section>
+	</section>
+
+	<section class="contact text-center" id="contact">
+      <section class="page-header pb-2 border-bottom">
+        <h3>Contato</h3>
+      </section>
+
+      <br />
+
+      <%= form_for @contact, url: {action: :send_mail, method: :post} do |f| %>
+        <section class="form-group">
+          <%= f.label :nome %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Digite seu nome *", required: true %>
+        </section>
+
+        <section class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: "form-control", placeholder: "Digite seu email *", required: true %>
+        </section>
+
+        <section class="form-group">
+          <%= f.label :telefone %>
+          <%= f.text_field :telephone, class: "form-control", placeholder: "(99) 99999-9999" %>
+        </section>
+
+        <section class="form-group textarea-group">
+          <%= f.label :mensagem %>
+          <%= f.text_area :message, class: "form-control", placeholder: "Digite sua mensagem *", required: true %>
+        </section>
+
+        <section class="form-group actions">
+          <%= f.submit "Enviar", class: 'btn btn-primary' %>
+        </section>
+      <% end %>
+    </section>
+</section>
