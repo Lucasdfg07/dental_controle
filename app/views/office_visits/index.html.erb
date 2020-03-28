@@ -72,4 +72,10 @@
   </tbody>
 </table>
 
+<%= will_paginate @office_visits %>
+
+<section class="text-center m-4">
+  <%= link_to 'Clique aqui para ver o relatório de consultas', export_office_visits_path(id: params[:id]) %>
+</section>
+
 <%= link_to 'Voltar à listagem de pacientes', patients_path, class: 'btn btn-warning mb-4' %>
