@@ -26,6 +26,9 @@ gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick', '~> 4.3'
 
+# Group BY
+gem 'groupdate'
+
 # Gem to generate graphs
 gem 'morrisjs-rails'
 gem 'raphael-rails'
