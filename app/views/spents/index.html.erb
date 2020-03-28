@@ -18,19 +18,23 @@
       </thead>
 
       <tbody>
-        <% @spents.each do |spent| %>
+        <% if @spents.count > 0 %>
+          <% @spents.each do |spent| %>
 
-          <% content_tag :div do %>
-            <%= @count += 1 %>
+            <% content_tag :div do %>
+              <%= @count += 1 %>
+            <% end %>
+            <tr>
+              <td><%= @count %></td>
+              <td><%= spent.value %></td>
+              <td><%= spent.description %></td>
+              <td><%= spent.created_at %></td>
+              <td><%= link_to 'Editar', edit_spent_path(spent), class: 'btn btn-dark' %></td>
+              <td><%= link_to 'Apagar', spent, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+            </tr>
           <% end %>
-          <tr>
-            <td><%= @count %></td>
-            <td><%= spent.value %></td>
-            <td><%= spent.description %></td>
-            <td><%= spent.created_at %></td>
-            <td><%= link_to 'Editar', edit_spent_path(spent), class: 'btn btn-dark' %></td>
-            <td><%= link_to 'Apagar', spent, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-          </tr>
+        <% else %>
+          <td colspan="6">Não existem gastos cadastrados ainda!</td>
         <% end %>
       </tbody>
     </table>

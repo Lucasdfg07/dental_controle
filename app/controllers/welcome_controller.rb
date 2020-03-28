@@ -8,6 +8,11 @@ class WelcomeController < ApplicationController
     @contact = Contact.new
 
     if user_signed_in?
+      if current_user.admin?
+        redirect_to superuser_welcome_index_path, notice: 'Bem vindo(a) '+current_user.name
+      end
+
+
       @q = OfficeVisit.ransack(params[:q])
     
       @office_visits = @q.result.joins(:patient)

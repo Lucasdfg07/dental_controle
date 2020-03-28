@@ -6,6 +6,8 @@
 @import "shared/navbar.scss";
 @import "shared/footer.scss";
 
+@import "superuser/shared/navbar.scss";
+
 @import 'morrisjs-rails';
 
 .logged_container {
@@ -47,4 +49,16 @@ table th, table tr, table td {
   text-align: center;
   z-index: 9999;
   opacity: 0.7;
+}
+
+@media (max-width: 991.98px) {
+	.navegacao ul li {
+		text-align: center;
+		border-bottom: 1px solid rgba(200,200,200,0.5);
+		padding: 10px;
+	}
+
+	.table_mobile {
+		overflow-x:auto;
+	}
 }

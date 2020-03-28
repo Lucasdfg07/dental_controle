@@ -31,43 +31,45 @@
   </section>
 <% end %>
 
-<table class="table table-hover text-center">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nome</th>
-      <th>Data marcada para Consulta</th>
-      <th>Tratamento realizado</th>
-      <th>Remarcar Paciente</th>
-      <th>Cadastrar Atendimento</th>
-      <th>Exibir</th>
-      <th></th>
-    </tr>
-  </thead>
+<section class="table_mobile">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Data marcada para Consulta</th>
+        <th>Tratamento realizado</th>
+        <th>Remarcar Paciente</th>
+        <th>Cadastrar Atendimento</th>
+        <th>Exibir</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% if @office_visits.count > 0 %>
-      <% @office_visits.each do |office_visit| %>
-        <% content_tag :div do %>
-          <%= @count += 1 %>
+    <tbody>
+      <% if @office_visits.count > 0 %>
+        <% @office_visits.each do |office_visit| %>
+          <% content_tag :div do %>
+            <%= @count += 1 %>
+          <% end %>
+
+          <tr>
+            <td><b><%= @count %></b></td>
+            <td><%= office_visit.patient.name%></td>
+            <td><%= office_visit.date %> <%= office_visit.hour %></td>
+            <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
+            <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
+            <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
+            <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+          </tr>
         <% end %>
-
-        <tr>
-          <td><b><%= @count %></b></td>
-          <td><%= office_visit.patient.name%></td>
-          <td><%= office_visit.date %> <%= office_visit.hour %></td>
-          <td><%= (office_visit.treatment.present?) ? office_visit.treatment : '-' %></td>
-          <td><%= link_to 'Remarcar', edit_office_visit_path(office_visit, remark: true, patient: params[:id], welcome: true), class: 'btn btn-secondary' %></td>
-          <td><%= link_to 'Cadastrar', edit_office_visit_path(office_visit, register: true, patient: params[:id], welcome: true), class: 'btn btn-info' %></td>
-          <td><%= link_to 'Exibir', office_visit, class: 'btn btn-primary' %></td>
-          <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-        </tr>
+      <% else %>
+        <td colspan="8">Não existem pacientes marcados pra hoje.</td>
       <% end %>
-    <% else %>
-      <td colspan="8">Não existem pacientes marcados pra hoje.</td>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</section>
 
 <section class="text-center m-4">
   <%= link_to 'Clique aqui para ver o relatório de pacientes', export_welcome_index_path %>

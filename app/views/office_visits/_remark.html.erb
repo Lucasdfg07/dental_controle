@@ -18,15 +18,24 @@
       </div>
     <% end %>
 
-    <div class="field form-group">
-      Confirmado para a data e hora <br />
-      <section class="row">
-        <%= f.text_field :date, type: 'date', class: 'form-control col-7 mr-3', required: true %>
-        <%= f.text_field :hour, type: 'time', class: 'form-control col-4', required: true %>
-      </section>
-    </div>
+    <section class="row">
+      <div class="field col-md-4">
+        Data Atual: <b><%= Date.today.strftime("%d/%m/%Y") %></b> <br />
+        Confirmado para a data e hora <br />
+        <%= f.text_field :date, type: 'date', required: true %>
+        <%= f.text_field :hour, type: 'time', required: true %>
 
-    <div class="actions">
-      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
-    </div>
+        <div class="actions">
+          <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+
+          <br /> <br />
+
+          <%= link_to 'Voltar', (params[:welcome].present?) ? root_path : :back, class: 'btn btn-warning' %>
+        </div>
+      </div>
+
+      <div class="field col-md-8">
+        <%= render 'calendar/show' %>
+      </div>
+    </section>
   <% end %>
