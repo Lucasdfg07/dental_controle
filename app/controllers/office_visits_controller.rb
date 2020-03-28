@@ -1,7 +1,9 @@
 class OfficeVisitsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_office_visit, only: [:show, :edit, :update, :destroy]
-  before_action :set_patient, only: [:index, :new]
+  before_action :set_patient, only: [:index, :new, :export]
+
+  require './lib/office_visits_pdf'
 
 
   def index
@@ -17,6 +19,15 @@ class OfficeVisitsController < ApplicationController
     else
       @count = 0
     end
+  end
+
+  
+  def export
+    @office_visits = OfficeVisit.all.order(date: :ASC, hour: :ASC)
+    
+    pdf = OfficeVisitsPdf::office_visits(@office_visits)
+    send_data pdf.render, filename: 'office_visits.pdf', 
+    type: 'application/pdf', disposition: 'inline'
   end
 
 

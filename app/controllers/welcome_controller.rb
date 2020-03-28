@@ -1,10 +1,13 @@
 class WelcomeController < ApplicationController
+
+  require './lib/patients_today_pdf'
+
   def index
   	@q = OfficeVisit.ransack(params[:q])
     
-    @office_visits = @q.result.where(date: Date.today)
+    @office_visits = @q.result.joins(:patient)
+                      .where("date(date) = ? AND patients.user_id = ?", Date.today, current_user.id)
                       .order(date: :ASC, hour: :ASC)
-                      .paginate(page: params[:page], per_page: 10)
     
 
     if params[:page].present? && params[:page] > "1"
@@ -23,6 +26,16 @@ class WelcomeController < ApplicationController
       @card = OfficeVisit.joins(:patient).where("payment_method = 1 AND patients.user_id = ?", current_user.id).count
       @health_insurance = OfficeVisit.joins(:patient).where("payment_method = 2 AND patients.user_id = ?", current_user.id).count
     end
+  end
+
+  def export
+    @office_visits = OfficeVisit.joins(:patient)
+    .where("date(date) = ? AND patients.user_id = ?", Date.today, current_user.id)
+    .order(date: :ASC, hour: :ASC)
+    
+    pdf = PatientsTodayPdf::office_visits(@office_visits)
+    send_data pdf.render, filename: 'patients_today.pdf', 
+    type: 'application/pdf', disposition: 'inline'
   end
 
   def send_mail

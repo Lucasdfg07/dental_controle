@@ -10,6 +10,9 @@ gem 'cancancan'
 
 gem 'bootstrap', '~> 4.4.1'
 
+# Generate PDF
+gem 'prawn-rails'
+
 # PWA
 gem 'serviceworker-rails'
 

@@ -2,6 +2,8 @@ class PatientsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
+  require './lib/all_patients_pdf'
+
 
   def index
     @q = Patient.ransack(params[:q])
@@ -16,6 +18,15 @@ class PatientsController < ApplicationController
     else
       @count = 0
     end
+  end
+
+  
+  def export
+    @patients = Patient.where(user: current_user).order(name: :ASC)
+    
+    pdf = AllPatientsPdf::patients(@patients)
+    send_data pdf.render, filename: 'office_visits.pdf', 
+    type: 'application/pdf', disposition: 'inline'
   end
 
 
