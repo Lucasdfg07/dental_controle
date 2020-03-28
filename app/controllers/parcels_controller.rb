@@ -22,7 +22,7 @@ class ParcelsController < ApplicationController
     @parcel.office_visit = @office_visit
 
     if @parcel.save
-      redirect_to request.referrer, notice: 'Parcel was successfully created.'
+      redirect_to request.referrer, notice: 'Parcela criada com sucesso!'
     else
       redirect_to request.referrer, notice: 'Erro ao salvar parcela.'
     end
@@ -32,7 +32,7 @@ class ParcelsController < ApplicationController
   def destroy
     @parcel.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'Parcel was successfully destroyed.' }
+      format.html { redirect_to request.referrer, notice: 'Parcela excluída com sucesso!' }
       format.json { head :no_content }
     end
   end
