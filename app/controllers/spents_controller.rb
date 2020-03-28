@@ -29,7 +29,7 @@ class SpentsController < ApplicationController
     @spent.user = current_user
 
     if @spent.save
-      redirect_to request.referrer, notice: 'Spent was successfully created.'
+      redirect_to request.referrer, notice: 'Gasto cadastrado com sucesso!'
     else
       redirect_to request.referrer, alert: 'Erro na criação do gasto.'
     end
@@ -38,7 +38,7 @@ class SpentsController < ApplicationController
 
   def update
       if @spent.update(spent_params)
-        redirect_to spents_path, notice: 'Spent was successfully updated.'
+        redirect_to spents_path, notice: 'Gasto alterado com sucesso!'
 
       else
         redirect_to spents_path, alert: 'Erro na atualização do gasto.'
@@ -49,7 +49,7 @@ class SpentsController < ApplicationController
   def destroy
     @spent.destroy
     respond_to do |format|
-      format.html { redirect_to spents_url, notice: 'Spent was successfully destroyed.' }
+      format.html { redirect_to spents_url, notice: 'Gasto apagado com sucesso!' }
       format.json { head :no_content }
     end
   end

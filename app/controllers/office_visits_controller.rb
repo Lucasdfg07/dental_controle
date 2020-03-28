@@ -57,9 +57,9 @@ class OfficeVisitsController < ApplicationController
     respond_to do |format|
       if @office_visit.save
         if params[:welcome].present?
-          format.html { redirect_to patients_path, notice: 'Office visit was successfully created.' }
+          format.html { redirect_to patients_path, notice: 'Consulta criada com sucesso!.' }
         else
-          format.html { redirect_to root_path, notice: 'Office visit was successfully created.' }
+          format.html { redirect_to root_path, notice: 'Consulta criada com sucesso!.' }
         end
         format.json { render :show, status: :created, location: @office_visit }
       else
@@ -76,9 +76,9 @@ class OfficeVisitsController < ApplicationController
     respond_to do |format|
       if @office_visit.update(office_visit_params)
         if params[:welcome].present?
-          format.html { redirect_to root_path, notice: 'Office visit was successfully updated.' }
+          format.html { redirect_to root_path, notice: 'Consulta editada com sucesso!' }
         else
-          format.html { redirect_to office_visits_path(id: params[:patient]), notice: 'Office visit was successfully updated.' }
+          format.html { redirect_to office_visits_path(id: params[:patient]), notice: 'Consulta editada com sucesso!' }
         end
         format.json { render :show, status: :ok, location: @office_visit }
       else
@@ -96,7 +96,7 @@ class OfficeVisitsController < ApplicationController
   def destroy
     @office_visit.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'Office visit was successfully destroyed.' }
+      format.html { redirect_to request.referrer, notice: 'Consulta deletada com sucesso!' }
       format.json { head :no_content }
     end
   end

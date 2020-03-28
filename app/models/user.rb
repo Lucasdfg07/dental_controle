@@ -13,4 +13,13 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates_presence_of :payment_expiration, :payment_status, :plan, :role
+
+  
+  def reset_mensal_messages_quant
+  	self.update(messages_sent: 0)
+  end
+
+  def update_message_sent_quantity
+    self.increment!(:messages_sent)
+  end
 end
