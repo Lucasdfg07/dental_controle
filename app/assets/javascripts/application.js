@@ -29,4 +29,8 @@ $( document ).on('turbolinks:load', function() {
       $('.alert').slideUp(500);
     }, 2500);
   });
+
+  $('.navbar-toggler').click(function() {
+    $('#navbarSupportedContent').toggle();
+  });
 });

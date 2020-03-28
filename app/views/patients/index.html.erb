@@ -7,43 +7,45 @@
   </section>
 <% end %>
 
-<table class="table table-hover text-center">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Telefone</th>
-      <th>Visualizar Consultas</th>
-      <th>Agendar Consulta</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<section class="table_mobile">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Visualizar Consultas</th>
+        <th>Agendar Consulta</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% if @patients.count > 0 %>
-      <% @patients.each do |patient| %>
-        <% content_tag :div do %>
-          <%= @count += 1 %>
+    <tbody>
+      <% if @patients.count > 0 %>
+        <% @patients.each do |patient| %>
+          <% content_tag :div do %>
+            <%= @count += 1 %>
+          <% end %>
+
+          <tr>
+            <td><b><%= @count %></b></td>
+            <td><%= patient.name %></td>
+            <td><%= patient.document %></td>
+            <td><%= patient.telephone %></td>
+            <td><%= link_to 'Consultas', office_visits_path(id: patient), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Agendar', new_office_visit_path(id: patient), class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Exibir', patient, class: 'btn btn-info' %></td>
+            <td><%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-dark' %></td>
+            <td><%= link_to 'Apagar', patient, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
+          </tr>
         <% end %>
-
-        <tr>
-          <td><b><%= @count %></b></td>
-          <td><%= patient.name %></td>
-          <td><%= patient.document %></td>
-          <td><%= patient.telephone %></td>
-          <td><%= link_to 'Consultas', office_visits_path(id: patient), class: 'btn btn-success' %></td>
-          <td><%= link_to 'Agendar', new_office_visit_path(id: patient), class: 'btn btn-primary' %></td>
-          <td><%= link_to 'Exibir', patient, class: 'btn btn-info' %></td>
-          <td><%= link_to 'Editar', edit_patient_path(patient), class: 'btn btn-dark' %></td>
-          <td><%= link_to 'Apagar', patient, method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %></td>
-        </tr>
+      <% else %>
+        <td colspan="9">Não existem pacientes cadastrados ainda.</td>
       <% end %>
-    <% else %>
-      <td colspan="9">Não existem pacientes cadastrados ainda.</td>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</section>
 
 <%= will_paginate @patients %>
 

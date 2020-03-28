@@ -1,4 +1,5 @@
-<h1>Cadastrar novo Atendimento</h1>
+<section class="col-md-4 offset-md-4">
+  <h1>Cadastrar novo Atendimento</h1>
 
   <%= form_for(@office_visit) do |f| %>
     <!-- If click from welcome path -->
@@ -40,4 +41,9 @@
     <div class="actions">
       <%= f.submit 'Salvar', class: 'btn btn-primary' %>
     </div>
+
+    <br />
+
+    <%= link_to 'Voltar', (params[:welcome].present?) ? root_path : :back, class: 'btn btn-warning' %>
   <% end %>
+</section>
