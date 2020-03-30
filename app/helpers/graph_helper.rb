@@ -2,7 +2,7 @@ module GraphHelper
 	def week_data
 	    (4.weeks.ago.to_date..Date.today).map do |date| {
 	      created_at: date,
-	      collected: OfficeVisit.all.count,
+	      collected: parcels_value(date),
 	      spent: spent_value(date)
 	    }
 	    end
@@ -27,7 +27,7 @@ module GraphHelper
   	end
 
   	def parcels_value(date)
-  		OfficeVisit.joins(:patient).joins(:parcels).where("date(office_visits.created_at) = ? AND patients.user_id = ?", date, current_user.id).sum("parcels.value")
+  		OfficeVisit.joins(:patient).joins(:parcels).where("date(office_visits.created_at) = ? AND patients.user_id = ?", date, current_user.id).count
   	end
 
   	def spent_value(date)
