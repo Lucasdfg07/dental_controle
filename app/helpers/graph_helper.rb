@@ -27,7 +27,7 @@ module GraphHelper
   	end
 
   	def parcels_value(date)
-  		OfficeVisit.joins(:patient).where("date(office_visits.created_at) = ? AND patients.user_id = ?", date, current_user.id).sum(:value)
+  		OfficeVisit.joins(:patient).joins(:parcels).where("date(office_visits.created_at) = ?", date).sum("parcels.value")
   	end
 
   	def spent_value(date)
