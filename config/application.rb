@@ -13,11 +13,11 @@ module DentalControle
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = "pt-BR"
     
-    ENV['TZ'] = 'America/Sao_Paulo'
+
     Time::DATE_FORMATS[:default] = "%d/%m/%Y %H:%M"
  	  Date::DATE_FORMATS[:default] = "%d/%m/%Y"
 
-   	config.time_zone = 'Brasilia'
+
    	config.action_mailer.default_url_options = { :host => 'localhost:3000' }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {

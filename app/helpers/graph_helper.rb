@@ -26,11 +26,11 @@ module GraphHelper
 	    end
   	end
 
-  	def parcels_value(date_visit)
-  		OfficeVisit.joins(:patient).joins(:parcels).where("date(office_visits.created_at) = ? AND patients.user_id = ?", date_visit, current_user.id).sum("parcels.value")
+  	def parcels_value(date)
+  		OfficeVisit.joins(:patient).joins(:parcels).where("date(office_visits.created_at) = ? AND patients.user_id = ?", date, current_user.id).sum("parcels.value")
   	end
 
-  	def spent_value(date_visit)
-  		Spent.where("date(created_at) = ? AND user_id = ?", date_visit, current_user.id).sum(:value)
+  	def spent_value(date)
+  		Spent.where("date(created_at) = ? AND user_id = ?", date, current_user.id).sum(:value)
   	end
 end
