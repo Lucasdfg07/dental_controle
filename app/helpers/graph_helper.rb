@@ -2,7 +2,7 @@ module GraphHelper
 	def week_data
 	    (4.weeks.ago.to_date..Date.today).map do |date| {
 	      created_at: date,
-	      collected: OfficeVisit.all.count,
+	      collected: parcels_value(date),
 	      spent: spent_value(date)
 	    }
 	    end
